@@ -1,0 +1,10 @@
+/GestionCourse.Android/obj/
+/GestionCourse.Android/bin/
+/GestionCourse.UWP/bin/
+/GestionCourse.UWP/obj/
+/GestionCourse/obj/
+/GestionCourse/bin/
+/.vs
+/GestionCourse.Android/GestionCourse.Android.csproj
+/GestionCourse.UWP/GestionCourse.UWP.csproj
+/GestionCourse/GestionCourse.csproj
