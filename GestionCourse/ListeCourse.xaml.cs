@@ -14,23 +14,32 @@ namespace GestionCourse
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ListeCourse : ContentPage
 	{
-		public List<Course> Courses { get; set; }
 
 		public ListeCourse()
 		{
 			InitializeComponent();
-			InitialiseListeCourse();
-			lstCourse.ItemsSource = Courses;
+
+			//On affecte notre liste de course que nous venons de créer à la propriété ITEMSOURCE de notre ListView (qui se trouve dans le xaml)
+			lstCourse.ItemsSource = App.Courses;
 		}
 
-		
-		private void InitialiseListeCourse()
+		private void btnCourse_Clicked(object sender, EventArgs e)
 		{
-			if (Courses == null)
-				Courses = new List<Course>();
-			Courses.Add(new Course { Nom = "Marathon de Paris", Lieu = "Paris", Distance = 42.195f });
-			Courses.Add(new Course { Nom = "Marathon de Montpellier", Lieu = "Montpellier", Distance = 42.195f });
-			Courses.Add(new Course { Nom = "Semi-Marathon de Phalempin", Lieu = "Phalempin", Distance = 21.1f });
+			Navigation.PushModalAsync(new AddCourse(lstCourse));
+		}
+
+		private void btnCoureur_Clicked(object sender, EventArgs e)
+		{
+			//"Navigation" nous permet de naviguer dans notre application, de bouger de page à page. Ici nous avons pris la décision 
+			// d'appeler la prochaine page en modal. Donc "AddCoureur" va venir s'ouvrir au dessus de ListeCourse.
+			Navigation.PushModalAsync(new AddCoureur());
+		}
+
+		private void lstCourse_ItemTapped(object sender, ItemTappedEventArgs e)
+		{
+			//Ici je viens lui dire que mon objet qui se situe dans e.Item est de type "Course"
+			//e.Item correspond à l'objet sur lequel nous avons "tapé"
+			Navigation.PushModalAsync(new ListeCoureur((Course)e.Item));
 		}
 	}
 }
